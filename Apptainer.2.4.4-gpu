@@ -1,0 +1,15 @@
+Bootstrap: docker
+From: quay.io/comparative-genomics-toolkit/cactus:v2.4.4-gpu
+
+%labels
+Maintainer ben.warren@plantandfood.co.nz
+Version 2.4.4
+
+%runscript
+if [ -x /home/cactus/bin/"$APPTAINER_NAME" ] || [ -x /home/cactus/cactus_env/bin/"$APPTAINER_NAME" ] ; then
+    exec $APPTAINER_NAME "$@"
+else
+  /bin/echo -e "This Apptainer image cannot provide a single entrypoint. Please use \"apptainer exec $APPTAINER_NAME <cmd>\", where <cmd> is one of the following:\n"
+  exec find /home/cactus/bin /home/cactus/cactus_env/bin -maxdepth 1 -executable -type f -name 'cactus*' -printf '%f    '
+fi
+
