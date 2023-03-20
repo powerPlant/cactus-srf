@@ -5,9 +5,6 @@ From: quay.io/comparative-genomics-toolkit/cactus:v2.4.4
 Maintainer ben.warren@plantandfood.co.nz
 Version 2.4.4
 
-%environment
-export PATH=/home/cactus/cactus_env/bin:/home/cactus/bin:$PATH
-
 %runscript
 if [ -x /home/cactus/bin/"$APPTAINER_NAME" ] || [ -x /home/cactus/cactus_env/bin/"$APPTAINER_NAME" ] ; then
     exec $APPTAINER_NAME "$@"
